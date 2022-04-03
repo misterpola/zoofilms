@@ -1,0 +1,238 @@
+@import 'materialize.scss';
+
+//MIXINS AND HELPERS
+
+@mixin mq($size){
+  @media screen and (min-width: $size ){
+    @content
+  }
+};
+
+@mixin sq($size){
+  width: $size;
+  height: $size;
+}
+
+@mixin flexbox($orientation, $wrap, $align){
+  display: flex;
+  flex-direction: $orientation;
+  flex-wrap: $wrap;
+  align-items: $align;
+  justify-content: $align;
+}
+
+.navbar-fixed{
+  position: fixed;
+
+  .nav-wrapper{
+    transition: background-color 0.4s ease;
+
+    .sidenav-trigger{
+      transition: color 0.4s ease;
+    }
+
+    .brand-logo{
+      text-align: center;
+      img{
+        width: 100%;
+
+        @media #{$medium-and-up}{
+          width: 30%;
+        }
+      }
+    }
+  }
+
+  .show-bg{
+    @media #{$medium-and-up}{
+      background-color: $primary-color !important;
+    }
+  }
+}
+
+.sidenav{
+  background: $primary-color;
+
+}
+
+.slider{
+  position: relative !important;
+  height: 100vh !important;
+
+  .caption{
+    bottom: 10% !important;
+
+    &.cnt{
+      bottom: 10px !important;
+    }
+  }
+
+  .logo{
+    width: 70% !important;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+    background-position: bottom !important;
+
+    @media #{$medium-and-up}{
+      width: 40% !important;
+    }
+  }
+}
+
+.bot{
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  text-align: center;
+  img{
+    width: 50%;
+  }
+}
+
+.screen{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.3)
+}
+
+@keyframes fadein{
+  0%   { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+@keyframes fadeout{
+  0%   { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+.big{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($color: #000000, $alpha: 0.97);
+  z-index: 999999999;
+
+  .cont{
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    @extend .z-depth-4;
+  }
+}
+
+.show{
+  animation: fadein .3s;
+}
+
+.out{
+  animation: fadeout .3s;
+}
+
+
+.clients{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 5em;
+  padding: 0.5em;
+  margin-bottom: 3em;
+  img{
+    width: 25%;
+    @media #{$medium-and-up}{
+      width: 12.5%;
+    }
+  }
+}
+
+.photos{
+  @include flexbox(row, wrap, center);
+  position: relative;
+
+  .photo{
+    width: 33.3%;
+    height: 33.3vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    transition: opacity .3s ease;
+
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+
+  .move-left {
+    left: 24px;
+
+    @media #{$medium-and-up}{
+      left: unset;
+      right: 100px !important;
+    }
+  }
+}
+
+.card{
+  .card-title{
+    font-weight: 400 !important;
+    text-shadow: 1px 1px 2px black !important;
+  }
+
+  .card-content{
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  
+    .collection{
+      margin: 0 !important;
+      border: none;
+
+      .collection-item{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        
+        span{
+          margin-left: 1em;
+        }
+      }
+    }
+  }
+}
+
+.contact-bar{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  a{
+    width: 33.3%;
+    height: 4em;
+    line-height: 4em;
+    text-align: center;
+  }
+}
+
+footer{
+  @include flexbox(column, wrap, center);
+  padding: 2em;
+
+  text-align: center;
+
+    img{
+      max-width: 50px;
+      height: auto;
+    }
+}
