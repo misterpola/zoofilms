@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ master ]
+jobs:
+  deploy:
+    name: Upload to Amazon S3
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::942525037847:role/GithubOIDC-Role-1QJ5ER7T4ZD4U
+        aws-region: ap-southeast-2
+
+    - name: Copy files to the website with the AWS CLI
+      run: |
+        aws s3 sync . s3://www.zoofilms.com.ar --exclude "ignore/*" --exclude ".github/*" --exclude ".git/*" --size-only 
